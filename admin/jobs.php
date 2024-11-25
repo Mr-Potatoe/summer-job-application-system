@@ -20,40 +20,6 @@ if (isset($_GET['job_id'])) {
         exit();
     }
 }
-
-// Handle form submissions
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    // Add a new job
-    if (isset($_POST['add_job'])) {
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $qualifications = $_POST['qualifications'];
-        $deadline = $_POST['application_deadline'];
-
-        $stmt = $pdo->prepare("INSERT INTO jobs (title, description, qualifications, application_deadline) 
-                               VALUES (?, ?, ?, ?)");
-        $stmt->execute([$title, $description, $qualifications, $deadline]);
-        $message = "Job added successfully!";
-    }
-
-    // Edit an existing job
-    elseif (isset($_POST['edit_job'])) {
-        $job_id = $_POST['job_id'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $qualifications = $_POST['qualifications'];
-        $deadline = $_POST['application_deadline'];
-
-        $stmt = $pdo->prepare("UPDATE jobs SET title = ?, description = ?, qualifications = ?, application_deadline = ?
-                               WHERE job_id = ?");
-        $stmt->execute([$title, $description, $qualifications, $deadline, $job_id]);
-        $message = "Job updated successfully!";
-        header('Location: jobs.php'); // Redirect after successful edit
-        exit();
-    }
-
-}
     
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -2,11 +2,11 @@
 session_start();
 include('../config/database.php');
 
-// Redirect if not logged in or not an admin
-if (!isset($_SESSION['admin_id'])) {
-    header('Location: login.php');
-    exit();
-}
+// // Redirect if not logged in or not an admin
+// if (!isset($_SESSION['admin_id'])) {
+//     header('Location: login.php');
+//     exit();
+// }
 
 // Handle admin creation
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

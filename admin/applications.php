@@ -39,13 +39,13 @@ if (isset($_GET['application_id'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';  // Set the SMTP server to Gmail
             $mail->SMTPAuth = true;
-            $mail->Username = 'your@gmail.com';  // Your Gmail address
-            $mail->Password = 'yourpassword';  // Your Gmail password (or app-specific password)
+            $mail->Username = 'jaymeajarns@gmail.com';  // Your Gmail address
+            $mail->Password = 'xnucwqrhcstbivqn';  // Your Gmail password (or app-specific password)
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom('your@gmail.com', 'Job Application System');
+            $mail->setFrom('jaymeajarns@gmail.com', 'Job Application System');
             $mail->addAddress($applicant['email']);  // Applicant's email address
 
             // Content
