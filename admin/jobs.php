@@ -20,7 +20,7 @@ if (isset($_GET['job_id'])) {
         exit();
     }
 }
-    
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Add a new job
@@ -34,6 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 VALUES (?, ?, ?, ?)");
         $stmt->execute([$title, $description, $qualifications, $deadline]);
         $message = "Job added successfully!";
+
+        // Redirect after adding the job
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit(); // Always exit after redirect to prevent further script execution
     }
 
     // Edit an existing job
@@ -44,10 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $qualifications = $_POST['qualifications'];
         $deadline = $_POST['application_deadline'];
 
-        $stmt = $pdo->prepare("UPDATE jobs SET title = ?, description = ?, qualifications = ?, application_deadline = ?
+        $stmt = $pdo->prepare("UPDATE jobs SET title = ?, description = ?, qualifications = ?, application_deadline = ? 
                                WHERE job_id = ?");
         $stmt->execute([$title, $description, $qualifications, $deadline, $job_id]);
         $message = "Job updated successfully!";
+
+        // Redirect after editing the job
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit(); // Always exit after redirect
     }
 
     // Delete a job
@@ -57,8 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare("DELETE FROM jobs WHERE job_id = ?");
         $stmt->execute([$job_id]);
         $message = "Job deleted successfully!";
+
+        // Redirect after deleting the job
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit(); // Always exit after redirect
     }
 }
+
 
 // Fetch jobs for display
 $stmt = $pdo->query("SELECT * FROM jobs");
